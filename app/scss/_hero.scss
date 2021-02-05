@@ -1,0 +1,85 @@
+.hero{
+    background-color: $veryLightGray;
+
+    .container{ // we add this class to solve the color and flexbox appaernae
+                // to add the desktop display
+            @include breakpoint-up(large){ // here we adjust the hero for the desktop design 
+                display:flex;
+                align-items: center;// to adjust the text and tiem
+                }
+        }
+ 
+
+    &__image{
+        // its for mobile desgin 
+        position: relative;// for the ::before image to apperar
+        background-image: url(/images/bg-intro-mobile.svg);
+        background-size: cover; // to cover all div for mobile
+        background-repeat: no-repeat;
+        background-position: center center;// to be center on the div
+        min-height: 17.5rem;//208px the high of the div for mobile to put image
+  
+        @include breakpoint-up(large){
+            flex:3;
+            order:2; // what to adjust what appear first
+            height:41rem;// to adjust the apperane //to know heiht of all div for all flex
+            background-image: none;
+            //background-position: left center;
+        }
+
+        @include breakpoint-up(medium){
+            min-height: 25rem; //400px
+            background-position: center 60%;
+        }
+
+        &::before{ 
+            @include breakpoint-up(large){
+                content: "";
+                position: absolute;
+                height: 100%;
+                background-image: url('/images/bg-intro-desktop.svg');        
+                background-repeat: no-repeat;
+                background-position: center bottom;
+                width: 150%;
+                background-size: 122%;
+                background-position: 0% 83%;
+              }
+        }
+       
+        &::after{ // on top we should put the phone image
+            content:"";//the conent properry should used to ::before apply
+            position: absolute;// to apperr the position
+            background-image: url('/images/image-mockups.png');//for mobil
+            background-repeat: no-repeat;
+            background-size: 93%; // we change it to become alittle smaller
+            background-position: center bottom;
+            width: 100%;
+            height: 100%;// the parent  have height
+
+            @include breakpoint-up(medium){ 
+                background-size: 52%;
+            }
+
+            @include breakpoint-up(large){
+                width: 120%;
+                height: 122%;
+                background-size: 94%;
+                background-position: center 150%;
+                left:22%
+            }
+
+        }
+    }
+
+    &__text{
+        text-align: center;
+        @include breakpoint-up(large){
+            flex:2;
+            order:1;// to adjust what appear first
+            text-align: left;
+           }
+   
+    }
+
+
+}

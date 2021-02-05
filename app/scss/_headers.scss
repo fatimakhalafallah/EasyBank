@@ -1,0 +1,127 @@
+.header{
+    // add the padding the space botom/up/ to the whole
+    // nav
+
+    &__logo{
+        img{
+            width: 8.8125rem;
+            height: 1.375rem;
+        }
+    }
+
+    nav{
+        padding-top:1.0625rem;
+        padding-bottom: 1.0625rem;
+        position: relative; // for the mobile menue and to allow the nav meeu to be on top of overlay
+        background: $white;
+    }
+
+
+   
+
+    &__toggle{ // for mobile menu(hamburger menue) 
+        > span{  // > point to child directily 
+           display:block;
+           width: 26px;
+           height: 2px;
+           background-color: $darkBlue;
+           transition: all 300ms ease-in-out;
+           transform-origin: 3px 1px;//(was left center)to make the change of the humbgaer menus
+
+           &:not(:last-child){// to add space between them  to bottom but not last
+              margin-bottom: 5px;
+           }
+        } 
+    }
+
+
+   &__links{
+    a{
+        font-size: $font-sm;
+        color:$grayishBlue;
+        transition: color 300ms ease-in-out;
+        position: relative;
+        // add space margin between (a) to right but excule the last child
+        &:not(:last-child){
+            margin-right: 32px;
+             }
+
+        &::before{ // add the line under the (a)
+            content: "";
+            display: block;
+            position: absolute;
+            height: 5px;
+            left:0px;
+            right: 0px;
+            bottom:-30px;
+            background:linear-gradient(to right ,$limeGreen,$brightCyan);
+            opacity: 0;
+            transition: opacity 300ms ease-in-out;
+        }     
+        &:hover{ 
+            color:$darkBlue; // the color when hover
+            &::before{ // the appeance of color each time before hobver
+                opacity: 1;
+              }   
+        }
+       }
+    }
+
+
+// this section for the humbger meneu
+     // the humber menu colors on the screen open/oervly
+     &.open{ 
+        .header__toggle{
+             // Humber open style
+            >span:first-child{
+                transform: rotate(45deg)
+            }
+            >span:nth-child(2){
+                opacity: 0; //  about the calrity
+            }
+            >span:last-child{
+            transform: rotate(-45deg)
+            }
+
+        }  
+    }
+
+    .overlay{ //to add the ovrly of mobile menu
+        position:fixed;
+        visibility: hidden;
+        left: 0px;
+        right: 0px;
+        top: 0px;//was 3.75rem become 0px, to allow nav to overflay 
+        bottom: 0px;
+        background: linear-gradient($darkBlue , transparent);  
+    }
+
+    &__menue{
+        visibility: hidden;
+        position:absolute; 
+        background: $white; 
+        border-radius: 5px;
+        //margin: 0px 1.5rem; //to match the padding of the nav .. all at the same //instead of using container
+        //the width 3 rem for both side margin 1.5 + 1.5
+        width:calc(100% - 3rem);
+        left: 50%; // dive the block to 50% the repostion it to cen
+        transform: translateX(-50%);//  reposition to center
+        padding:1.625rem; // padding the a element them self/due that the padding add space to the content itself
+        margin-top:1.5rem ;//to add margin to top of menue 
+        a {
+            color:$darkBlue;
+            display:block;  //the <a> by default dissplay inline so we change to block to display
+            padding:0.625rem; // 10px
+            text-align: center;
+        }
+        // the padding for top was 26 and for the a itslef was 36
+        // to have the right padding for a would be 36-36 whic is 10px
+
+    }
+
+
+ 
+}
+
+
+
